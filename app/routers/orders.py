@@ -18,8 +18,9 @@ class OrderOut(OrderCreate):
 
 
 @router.get("/", response_model=list[OrderOut])
-def list_orders():
-    return list(_orders_db.values())
+def list_orders(limit: int = 50, offset: int = 0):
+    values = list(_orders_db.values())
+    return values[offset: offset + limit]
 
 
 @router.post("/", response_model=OrderOut)
