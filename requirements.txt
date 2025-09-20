@@ -4,4 +4,4 @@ sqlalchemy==2.0.30
 alembic==1.13.1
 pydantic-settings==2.3.3
 pytest==8.2.1
-httpx==0.27.0
+httpx==0.27.0pyjwt==2.8.0
