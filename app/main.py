@@ -10,3 +10,13 @@ app.include_router(orders.router)
 @app.get("/healthz")
 def healthz():
     return {"status": "ok"}
+
+
+@app.get("/health/live")
+def live():
+    return {"status": "live"}
+
+
+@app.get("/health/ready")
+def ready():
+    return {"status": "ready"}
