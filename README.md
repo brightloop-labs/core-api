@@ -14,3 +14,19 @@ docker-compose up --build
 ```
 
 The API will be available at `http://localhost:8000`.
+
+## API examples
+
+Create an order:
+
+```bash
+curl -X POST http://localhost:8000/orders/ \
+  -H "Content-Type: application/json" \
+  -d '{"customer_email": "jane@example.com", "total_amount": 49.99}'
+```
+
+List orders:
+
+```bash
+curl http://localhost:8000/orders/
+```
