@@ -14,6 +14,12 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         _requests[client_ip] = [t for t in _requests[client_ip] if now - t < WINDOW_SECONDS]
         if len(_requests[client_ip]) >= MAX_REQUESTS:
             from starlette.responses import JSONResponse
-            return JSONResponse({"detail": "Rate limit exceeded"}, status_code=429)
+            response = JSONResponse({"detail": "Rate limit exceeded"}, status_code=429)
+            response.headers["X-RateLimit-Limit"] = str(MAX_REQUESTS)
+            response.headers["X-RateLimit-Remaining"] = "0"
+            return response
         _requests[client_ip].append(now)
-        return await call_next(request)
+        response = await call_next(request)
+        response.headers["X-RateLimit-Limit"] = str(MAX_REQUESTS)
+        response.headers["X-RateLimit-Remaining"] = str(MAX_REQUESTS - len(_requests[client_ip]))
+        return response
