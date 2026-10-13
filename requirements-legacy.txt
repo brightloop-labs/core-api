@@ -1,0 +1,7 @@
+# Pinned for the legacy CSV/YAML report exporter (see tools/legacy_export.py).
+# Not installed by CI; scheduled for removal once exporter is migrated.
+requests==2.25.0
+pyyaml==5.3.1
+jinja2==2.11.2
+urllib3==1.26.4
+cryptography==3.3.2
